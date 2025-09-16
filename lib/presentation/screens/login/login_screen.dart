@@ -4,7 +4,7 @@ import 'package:noviindus_technologies_m_t/core/extensions/sized_box_extension.d
 import 'package:noviindus_technologies_m_t/core/helper/result_dialog.dart';
 import 'package:noviindus_technologies_m_t/presentation/providers/auth_provider.dart';
 import 'package:noviindus_technologies_m_t/presentation/screens/home/home_screen.dart';
-import 'package:provider/provider.dart';
+ import 'package:provider/provider.dart';
 import '../../widget/custom_button.dart';
 import '../../widget/custom_text.dart';
 import '../../widget/custom_text_field.dart';
@@ -40,22 +40,14 @@ class LoginScreen extends StatelessWidget {
                               fontSize: 24,
                               fontWeight: FontWeight.w600,
                             ),
-                            30.vs(),
-                            CustomText(text: 'Email'),
-                            5.hs(),
-                            CustomTextField(
-                              controller: TextEditingController(),
-                              hintText: 'Enter your email',
+
+                            CustomTextField(title: 'Email',
+                               hintText: 'Enter your email',
                             ),
-                            30.vs(),
-                            CustomText(text: 'Password'),
-                            5.hs(),
-                            CustomTextField(
-                              controller: TextEditingController(),
-                              hintText: 'Enter password',
+                             CustomTextField(title: "Password",
+                               hintText: 'Enter password',
                             ),
-                            30.vs(),
-                            authProvider.isLoading
+                             authProvider.isLoading
                                 ? LoadingWidget()
                                 : CustomButton(
                               title: "Login",

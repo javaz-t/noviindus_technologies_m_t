@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:noviindus_technologies_m_t/presentation/providers/auth_provider.dart';
 import 'package:noviindus_technologies_m_t/presentation/providers/patient_provider.dart';
-import 'package:noviindus_technologies_m_t/presentation/screens/splash/splash_screen.dart';
-import 'package:provider/provider.dart';
+import 'package:noviindus_technologies_m_t/presentation/screens/home/home_screen.dart';
+  import 'package:provider/provider.dart';
 
 import 'data/repository/auth_repository.dart';
 import 'data/services/auth_service.dart';
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home:SplashScreen(),
+      home:HomeScreen  (),
     );
   }
 }
