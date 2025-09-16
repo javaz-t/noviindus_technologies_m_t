@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:noviindus_technologies_m_t/core/extensions/navigation_extension.dart';
+import 'package:noviindus_technologies_m_t/presentation/screens/registration/registration_screen.dart';
+import 'package:noviindus_technologies_m_t/presentation/widget/custom_app_bar.dart';
 import 'package:noviindus_technologies_m_t/presentation/widget/custom_button.dart';
 import 'package:provider/provider.dart';
  import '../../providers/patient_provider.dart';
@@ -24,7 +27,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: CustomButton(title: "Register Now", onTap: () {}),
+      floatingActionButton: CustomButton(title: "Register Now", onTap: () {
+        pushToScreen(RegistrationScreen(), context);
+      }),
        body: SafeArea(
          child: Consumer<PatientProvider>(
           builder: (context, provider, child) {
@@ -40,16 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(onPressed: (){
-                        Navigator.pop(context);
-                      }, icon:Icon(Icons.arrow_back)),
-                      IconButton(onPressed: (){}, icon: Icon(Icons.notification_add_outlined))
-
-                    ],
-                  ),
+                  CustomAppBar(),
                   Expanded(
                     child: ListView.builder(
                       itemCount: provider.patients.length,
