@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:noviindus_technologies_m_t/core/extensions/navigation_extension.dart';
 import 'package:noviindus_technologies_m_t/core/extensions/sized_box_extension.dart';
-
+import 'package:noviindus_technologies_m_t/core/helper/result_dialog.dart';
+import 'package:noviindus_technologies_m_t/presentation/providers/auth_provider.dart';
+import 'package:noviindus_technologies_m_t/presentation/screens/home/home_screen.dart';
+import 'package:provider/provider.dart';
 import '../../widget/custom_button.dart';
 import '../../widget/custom_text.dart';
 import '../../widget/custom_text_field.dart';
@@ -9,67 +13,79 @@ import '../../widget/terms_and_privacy.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
-  final TextEditingController usernameController = TextEditingController(
-    text: "test_user",
-  );
-  final TextEditingController passwordController = TextEditingController(
-    text: "12345678",
-  );
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-     return Scaffold(
-      body: SingleChildScrollView(
-        child: false
-            ? LoadingWidget()
-            : Column(
-          children: [
-            Image.asset(
-              "assets/images/login.jpg",
-              fit: BoxFit.cover,
-              height: 217,
-              width: double.maxFinite,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                children: [
-                  30.vs(),
-                  CustomText(
-                    text: 'Login or register to book your appointments',
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  30.vs(),
-                  CustomText(text: 'Email'),
-                  5.hs(),
-                  CustomTextField(
-                    controller: TextEditingController(),
-                    hintText: 'Enter your email',
-                  ),
-                  30.vs(),
-                  CustomText(text: 'Password'),
-                  5.hs(),
-                  CustomTextField(
-                    controller: TextEditingController(),
-                    hintText: 'Enter password',
-                  ),
-                  30.vs(),
-                  CustomButton(
-                    title: "Login",
-                    onTap: ()   {
+    return Scaffold(
+      body: Consumer<AuthProvider>(
+        builder: (context, authProvider, child) {
+          return SingleChildScrollView(
+            child:  Column(
+                    children: [
+                      Image.asset(
+                        "assets/images/login.jpg",
+                        fit: BoxFit.cover,
+                        height: 217,
+                        width: double.maxFinite,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Column(
+                          children: [
+                            30.vs(),
+                            CustomText(
+                              text:
+                                  'Login or register to book your appointments',
+                              fontSize: 24,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            30.vs(),
+                            CustomText(text: 'Email'),
+                            5.hs(),
+                            CustomTextField(
+                              controller: TextEditingController(),
+                              hintText: 'Enter your email',
+                            ),
+                            30.vs(),
+                            CustomText(text: 'Password'),
+                            5.hs(),
+                            CustomTextField(
+                              controller: TextEditingController(),
+                              hintText: 'Enter password',
+                            ),
+                            30.vs(),
+                            authProvider.isLoading
+                                ? LoadingWidget()
+                                : CustomButton(
+                              title: "Login",
+                              onTap: () async {
+                                bool isSuccess = await authProvider.login(
+                                  "test_user",
+                                  "12345678",
+                                );
+                                if(isSuccess){
+                                  ToastUtils.showSuccess(context, "logged In  successfully");
+                                  pushAndRemoveUntilScreen(HomeScreen(), context);
+                                }
+                                else{
+                                  ToastUtils.showError(context, "Failed to log In");
 
-                    },
+                                }
+                              },
+                            ),
+                            30.vs(),
+                            TermsAndPrivacyText(
+                              onTermsTap: () {},
+                              onPrivacyTap: () {},
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  30.vs(),
-                  TermsAndPrivacyText(
-                    onTermsTap: () {},
-                    onPrivacyTap: () {},
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
