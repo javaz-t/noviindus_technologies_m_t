@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:noviindus_technologies_m_t/core/constants/app_color_constant.dart';
+import 'package:noviindus_technologies_m_t/core/constants/app_constant.dart';
 
-Future<Map<String, dynamic>?> showAddPatientDialog(BuildContext context) async {
+Future<Map<String, dynamic>?> showAddPatientDialog(
+  BuildContext context,
+  List<String> items,
+) async {
   int maleCount = 0;
   int femaleCount = 0;
+
   String? selectedTreatment;
 
   return await showDialog<Map<String, dynamic>>(
@@ -20,7 +24,7 @@ Future<Map<String, dynamic>?> showAddPatientDialog(BuildContext context) async {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   const Text(
+                  const Text(
                     "Choose Treatment",
                     style: TextStyle(fontWeight: FontWeight.w600),
                   ),
@@ -29,27 +33,38 @@ Future<Map<String, dynamic>?> showAddPatientDialog(BuildContext context) async {
                     value: selectedTreatment,
                     hint: const Text("Choose preferred treatment"),
                     style: TextStyle(overflow: TextOverflow.ellipsis),
-                    items: ["Treatment A", "Treatment B", "Treatment C"]
-                        .map((t) => DropdownMenuItem(value: t, child: Text(t)))
+                    items: items
+                        .map(
+                          (t) => DropdownMenuItem(
+                            value: t,
+                            child: SizedBox(
+                              width: 150,
+                              child: Text(
+                                t,
+                                style: TextStyle(color: Colors.black,overflow: TextOverflow.ellipsis),
+                              ),
+                            ),
+                          ),
+                        )
                         .toList(),
                     onChanged: (val) {
                       setState(() => selectedTreatment = val);
                     },
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: AppColors.borderColor,
+                      fillColor: AppConstants.borderColor,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: AppColors.borderColor),
+                        borderSide: BorderSide(color: AppConstants.borderColor),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: AppColors.borderColor),
+                        borderSide: BorderSide(color: AppConstants.borderColor),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide(
-                          color: AppColors.borderColor,
+                          color: AppConstants.borderColor,
                           width: 1.5,
                         ),
                       ),
@@ -57,13 +72,13 @@ Future<Map<String, dynamic>?> showAddPatientDialog(BuildContext context) async {
                   ),
                   const SizedBox(height: 16),
 
-                   const Text(
+                  const Text(
                     "Add Patients",
                     style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(height: 12),
 
-                   Row(
+                  Row(
                     children: [
                       const Expanded(child: Text("Male")),
                       IconButton(
@@ -84,7 +99,7 @@ Future<Map<String, dynamic>?> showAddPatientDialog(BuildContext context) async {
                           border: Border.all(
                             color: selectedTreatment == null
                                 ? Colors.grey
-                                : AppColors.borderColor,
+                                : AppConstants.borderColor,
                           ),
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -101,7 +116,7 @@ Future<Map<String, dynamic>?> showAddPatientDialog(BuildContext context) async {
                   ),
                   const SizedBox(height: 8),
 
-                   Row(
+                  Row(
                     children: [
                       const Expanded(child: Text("Female")),
                       IconButton(
@@ -119,7 +134,7 @@ Future<Map<String, dynamic>?> showAddPatientDialog(BuildContext context) async {
                           vertical: 8,
                         ),
                         decoration: BoxDecoration(
-                          border: Border.all(color: AppColors.borderColor),
+                          border: Border.all(color: AppConstants.borderColor),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(femaleCount.toString()),
@@ -136,7 +151,7 @@ Future<Map<String, dynamic>?> showAddPatientDialog(BuildContext context) async {
 
                   const SizedBox(height: 20),
 
-                   SizedBox(
+                  SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(

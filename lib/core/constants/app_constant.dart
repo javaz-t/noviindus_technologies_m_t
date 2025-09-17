@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AppColors {
+class AppConstants {
   static const Color buttonPrimaryColor = Color(0xFF006837);
   static final textFieldBorderColor = Color(0xFF000000).withOpacity(.1);
 static final textFieldHintTextColor = Color(0xFF000000).withOpacity(.4);
@@ -9,5 +9,29 @@ static final textFieldHintTextColor = Color(0xFF000000).withOpacity(.4);
   static final patientTileSubTitleColor = Color(0xFF006837);
   static final patientTileSubDetailsColor = Color(0xFF00000080).withOpacity(.5);
   static final borderColor = Color(0xFF00000033).withOpacity(.2);
+
+  static const  baseUrl= "https://flutter-amr.noviindus.in/api/";
+  static List<String> locationsInKerala = [
+    "Thiruvananthapuram",
+    "Kochi",
+    "Kozhikode",
+    "Kollam",
+    "Thrissur",
+    "Alappuzha",
+    "Kottayam",
+    "Palakkad",
+    "Kannur",
+    "Kasaragod",
+    "Malappuram",
+    "Idukki",
+    "Wayanad",
+    "Pathanamthitta",
+    "Varkala",
+    "Munnar",
+    "Guruvayoor",
+    "Thalassery",
+    "Changanassery",
+    "Tirur",
+  ];
 
  }

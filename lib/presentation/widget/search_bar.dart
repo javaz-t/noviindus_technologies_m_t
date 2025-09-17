@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:noviindus_technologies_m_t/core/constants/app_color_constant.dart';
+import 'package:noviindus_technologies_m_t/core/constants/app_constant.dart';
 import 'package:noviindus_technologies_m_t/presentation/widget/custom_button.dart';
 
 class HomeSearchBar extends StatelessWidget {
@@ -26,12 +26,12 @@ class HomeSearchBar extends StatelessWidget {
               hintText: 'Search for treatments',
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color:AppColors.textFieldHintTextColor, // Change to your desired color
+                  color:AppConstants.textFieldHintTextColor, // Change to your desired color
                   width: .850,
                 ),
               ),
-              hintStyle: TextStyle(color: AppColors.borderColor),
-              prefixIcon: Icon(Icons.search_sharp,color: AppColors.borderColor,),
+              hintStyle: TextStyle(color: AppConstants.borderColor),
+              prefixIcon: Icon(Icons.search_sharp,color: AppConstants.borderColor,),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),

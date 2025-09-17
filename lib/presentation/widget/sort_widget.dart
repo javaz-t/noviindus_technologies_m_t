@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../core/constants/app_color_constant.dart';
+import '../../core/constants/app_constant.dart';
 import 'custom_text.dart';
 
 class SortWidget extends StatelessWidget {
@@ -15,7 +15,7 @@ class SortWidget extends StatelessWidget {
           height: 40,
           padding: const EdgeInsets.symmetric(horizontal: 16),
           decoration: BoxDecoration(
-            border: Border.all(color: AppColors.borderColor),
+            border: Border.all(color: AppConstants.borderColor),
             borderRadius: BorderRadius.circular(24),
           ),
           child: DropdownButtonHideUnderline(

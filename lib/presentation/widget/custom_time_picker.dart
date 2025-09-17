@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:noviindus_technologies_m_t/core/constants/app_color_constant.dart';
+import 'package:noviindus_technologies_m_t/core/constants/app_constant.dart';
 import 'package:noviindus_technologies_m_t/core/extensions/sized_box_extension.dart';
 import 'package:noviindus_technologies_m_t/presentation/widget/custom_text.dart';
 
@@ -70,10 +70,10 @@ class _CustomTimeSelectorState extends State<CustomTimeSelector> {
         child: InputDecorator(
           decoration: InputDecoration(
             filled: true,
-            fillColor: AppColors.tileBodyFillColor,
+            fillColor: AppConstants.tileBodyFillColor,
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: AppColors.textFieldBorderColor,
+                color: AppConstants.textFieldBorderColor,
                 width: .850,
               ),
             ),
@@ -91,7 +91,7 @@ class _CustomTimeSelectorState extends State<CustomTimeSelector> {
               Text(
                 value,
                 style: TextStyle(
-                  color:   AppColors.textFieldHintTextColor
+                  color:   AppConstants.textFieldHintTextColor
                       
                 ),
               ),

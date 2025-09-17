@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:noviindus_technologies_m_t/core/constants/app_color_constant.dart';
+import 'package:noviindus_technologies_m_t/core/constants/app_constant.dart';
 import 'package:noviindus_technologies_m_t/core/extensions/sized_box_extension.dart';
 import 'package:noviindus_technologies_m_t/presentation/widget/custom_text.dart';
 
@@ -39,10 +39,10 @@ class CustomDropdown<T> extends StatelessWidget {
 
             hintStyle: TextStyle(color: Colors.red,fontWeight: FontWeight.w200),
             filled: true,
-            fillColor: AppColors.tileBodyFillColor,
+            fillColor: AppConstants.tileBodyFillColor,
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: AppColors.textFieldBorderColor,
+                color: AppConstants.textFieldBorderColor,
                 width: .850,
               ),
             ),

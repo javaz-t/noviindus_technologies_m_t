@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:noviindus_technologies_m_t/presentation/widget/custom_text.dart';
 
-import '../../core/constants/app_color_constant.dart';
+import '../../core/constants/app_constant.dart';
 
 class CustomButton extends StatelessWidget {
   final String title;
@@ -27,7 +27,7 @@ class CustomButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color:titleColor==null? AppColors.buttonPrimaryColor: Colors.green.withOpacity(.5) ,
+          color:titleColor==null? AppConstants.buttonPrimaryColor: Colors.green.withOpacity(.5) ,
           borderRadius: BorderRadius.circular(8.5),
         ),
         width: width,

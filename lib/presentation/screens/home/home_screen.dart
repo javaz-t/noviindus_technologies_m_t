@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:noviindus_technologies_m_t/core/constants/app_color_constant.dart';
+import 'package:noviindus_technologies_m_t/core/constants/app_constant.dart';
 import 'package:noviindus_technologies_m_t/core/extensions/navigation_extension.dart';
 import 'package:noviindus_technologies_m_t/core/extensions/sized_box_extension.dart';
 import 'package:noviindus_technologies_m_t/core/utils/shared_prefs_storage.dart';
@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   20.vs(),
                   SortWidget(),
                   5.vs(),
-                  Divider(color: AppColors.borderColor),
+                  Divider(color: AppConstants.borderColor),
                   5.vs(),
                   filteredPatients.isEmpty
                       ? const Expanded(

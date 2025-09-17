@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:noviindus_technologies_m_t/core/constants/app_color_constant.dart';
+import 'package:noviindus_technologies_m_t/core/constants/app_constant.dart';
  import 'package:noviindus_technologies_m_t/core/extensions/sized_box_extension.dart';
 import 'package:noviindus_technologies_m_t/core/helper/date_format.dart';
  import 'package:noviindus_technologies_m_t/presentation/widget/custom_text.dart';
@@ -18,7 +18,7 @@ class CustomPatientTitle extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 13),
       width: double.maxFinite,
       decoration: BoxDecoration(
-        color: AppColors.patientTileBodyFillColor,
+        color: AppConstants.patientTileBodyFillColor,
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(
@@ -50,7 +50,7 @@ class CustomPatientTitle extends StatelessWidget {
                         text:patient.patientDetails.first.treatment??"No Treatment Selected",
                         fontSize: 16,
                         fontWeight: FontWeight.w300,
-                        color: AppColors.patientTileSubTitleColor,
+                        color: AppConstants.patientTileSubTitleColor,
                       ),
                     ),
                     14.vs(),
@@ -60,7 +60,7 @@ class CustomPatientTitle extends StatelessWidget {
                         4.hs(),
                         CustomText(
                           text:formatDate(patient.dateTime??DateTime.now()),
-                          color: AppColors.patientTileSubDetailsColor,
+                          color: AppConstants.patientTileSubDetailsColor,
                           fontSize: 15,
                         ),
                         22.hs(),
@@ -68,7 +68,7 @@ class CustomPatientTitle extends StatelessWidget {
                         4.hs(),
                         CustomText(
                           text: patient.name,
-                          color: AppColors.patientTileSubDetailsColor,
+                          color: AppConstants.patientTileSubDetailsColor,
                           fontSize: 15,
                         ),
                       ],
@@ -78,7 +78,7 @@ class CustomPatientTitle extends StatelessWidget {
               ],
             ),
           ),
-          Divider(color: AppColors.borderColor),
+          Divider(color: AppConstants.borderColor),
           9.vs(),
           InkWell(
             onTap: (){

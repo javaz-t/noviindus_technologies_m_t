@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:noviindus_technologies_m_t/core/constants/app_color_constant.dart';
+import 'package:noviindus_technologies_m_t/core/constants/app_constant.dart';
 import 'package:noviindus_technologies_m_t/core/extensions/sized_box_extension.dart';
 import 'package:noviindus_technologies_m_t/domain/entities/treatment.dart';
 import 'package:noviindus_technologies_m_t/presentation/widget/custom_text.dart';
@@ -25,7 +25,7 @@ class TreatmentTile extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 13),
       width: double.maxFinite,
       decoration: BoxDecoration(
-        color: AppColors.patientTileBodyFillColor,
+        color: AppConstants.patientTileBodyFillColor,
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(
@@ -107,19 +107,19 @@ class TreatmentTile extends StatelessWidget {
       children: [
         Text(
           label,
-          style: TextStyle(color: AppColors.buttonPrimaryColor, fontSize: 16),
+          style: TextStyle(color: AppConstants.buttonPrimaryColor, fontSize: 16),
         ),
         const SizedBox(width: 4.0),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           decoration: BoxDecoration(
-            border: Border.all(color: AppColors.borderColor, width: 1.5),
+            border: Border.all(color: AppConstants.borderColor, width: 1.5),
             borderRadius: BorderRadius.circular(5.0),
           ),
           child: Text(
             count.toString(),
             style: TextStyle(
-              color: AppColors.buttonPrimaryColor,
+              color: AppConstants.buttonPrimaryColor,
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
