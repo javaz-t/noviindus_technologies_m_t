@@ -30,7 +30,7 @@ class CustomPatientTitle extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomText(
-                  text: '$index',
+                  text: '${index+1}',
                   fontWeight: FontWeight.w500,
                   fontSize: 18,
                 ),
@@ -44,11 +44,14 @@ class CustomPatientTitle extends StatelessWidget {
                       fontSize: 18,
                     ),
                     4.vs(),
-                    CustomText(
-                      text:patient.name??"No Treatment Selected",
-                      fontSize: 16,
-                      fontWeight: FontWeight.w300,
-                      color: AppColors.patientTileSubTitleColor,
+                    SizedBox(
+                      width:200,
+                      child: CustomText(
+                        text:patient.patientDetails.first.treatment??"No Treatment Selected",
+                        fontSize: 16,
+                        fontWeight: FontWeight.w300,
+                        color: AppColors.patientTileSubTitleColor,
+                      ),
                     ),
                     14.vs(),
                     Row(

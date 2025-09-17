@@ -5,6 +5,7 @@ class PatientModel extends Patient {
   final BranchModel? branch;
 
   PatientModel({
+
     required super.id,
     required super.name,
     required super.phone,
@@ -85,7 +86,7 @@ class PatientDetailModel {
       male: json['male']?.toString() ?? '',
       female: json['female']?.toString() ?? '',
       patient: json['patient'],
-      treatment: json['treatment']?.toString(),
+      treatment: json['treatment_name']?.toString(),
     );
   }
 
