@@ -72,6 +72,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           hintText: "Enter your full name",
                         ),
                         CustomTextField(
+                          isNumbersOnlyAllowed: true,
                           onChanged: registerProvider.onWhatsappChanged,
                           title: "Whatsapp Number",
                           hintText: "Enter your Whatsapp number",

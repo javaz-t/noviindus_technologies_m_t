@@ -42,14 +42,14 @@ class _HomeScreenState extends State<HomeScreen> {
           return provider.isLoading
               ? const SizedBox.shrink()
               : Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: CustomButton(
-                    title: "Register Now",
-                    onTap: () {
-                      pushToScreen(RegistrationScreen(), context);
-                    },
-                  ),
-                );
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: CustomButton(
+              title: "Register Now",
+              onTap: () {
+                pushToScreen(const RegistrationScreen(), context);
+              },
+            ),
+          );
         },
       ),
       body: SafeArea(
@@ -70,9 +70,11 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 children: [
                   20.vs(),
-                  CustomAppBar(onTap: (){
-                    showLogoutConfirmationDialog(context);
-                  },),
+                  CustomAppBar(
+                    onTap: () {
+                      showLogoutConfirmationDialog(context);
+                    },
+                  ),
                   16.vs(),
                   HomeSearchBar(
                     searchController: _searchController,
@@ -82,32 +84,37 @@ class _HomeScreenState extends State<HomeScreen> {
                       });
                     },
                     onSearchTap: () {
-                      // first load only few then load rest by searchign, need to add stream
+                      // TODO: implement search API if required
                     },
                   ),
                   20.vs(),
-                  SortWidget(),
+                  const SortWidget(),
                   5.vs(),
                   Divider(color: AppConstants.borderColor),
                   5.vs(),
                   filteredPatients.isEmpty
                       ? const Expanded(
-                          child: Center(
-                            child: Text('No matching patients found'),
-                          ),
-                        )
+                    child: Center(
+                      child: Text('No matching patients found'),
+                    ),
+                  )
                       : Expanded(
-                          child: ListView.builder(
-                            itemCount: filteredPatients.length,
-                            itemBuilder: (context, index) {
-                              final patient = filteredPatients[index];
-                              return CustomPatientTitle(
-                                index: index,
-                                patient: patient,
-                              );
-                            },
-                          ),
-                        ),
+                    child: RefreshIndicator(
+                      onRefresh: _loadPatients,
+                      child: ListView.builder(
+                        physics:
+                        const AlwaysScrollableScrollPhysics(),
+                        itemCount: filteredPatients.length,
+                        itemBuilder: (context, index) {
+                          final patient = filteredPatients[index];
+                          return CustomPatientTitle(
+                            index: index,
+                            patient: patient,
+                          );
+                        },
+                      ),
+                    ),
+                  ),
                 ],
               ),
             );
@@ -121,7 +128,6 @@ class _HomeScreenState extends State<HomeScreen> {
     final patientProvider = context.read<PatientProvider>();
     await patientProvider.fetchPatients();
   }
-
 
   Future<void> showLogoutConfirmationDialog(BuildContext context) async {
     return showDialog<void>(
@@ -142,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: const Text('Log Out'),
               onPressed: () async {
                 await SharedPrefsStorage.clearToken();
-                pushAndRemoveUntilScreen(LoginScreen(), context);
+                pushAndRemoveUntilScreen(  LoginScreen(), context);
               },
             ),
           ],

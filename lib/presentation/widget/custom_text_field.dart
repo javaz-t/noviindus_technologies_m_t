@@ -30,7 +30,9 @@ class CustomTextField extends StatelessWidget {
               ? [FilteringTextInputFormatter.digitsOnly]
               : null,
           onChanged: onChanged,
-          keyboardType: TextInputType.emailAddress,
+          keyboardType: isNumbersOnlyAllowed?
+          TextInputType.number:
+          null,
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: TextStyle(color: AppConstants.textFieldHintTextColor),

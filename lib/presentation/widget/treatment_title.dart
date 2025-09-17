@@ -40,7 +40,7 @@ class TreatmentTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
                children: [
                 CustomText(
-                  text: '$index.',
+                  text: '${index+1}.',
                   fontWeight: FontWeight.w500,
                   fontSize: 18,
                 ),

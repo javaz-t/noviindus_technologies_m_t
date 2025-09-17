@@ -66,10 +66,13 @@ class CustomPatientTitle extends StatelessWidget {
                         22.hs(),
                         Icon(Icons.people_outline, color: Colors.red),
                         4.hs(),
-                        CustomText(
-                          text: patient.name,
-                          color: AppConstants.patientTileSubDetailsColor,
-                          fontSize: 15,
+                         SizedBox(
+                           width: 80,
+                           child: CustomText(
+                            text: patient.name,
+                            color: AppConstants.patientTileSubDetailsColor,
+                            fontSize: 15,
+                          ),
                         ),
                       ],
                     ),
