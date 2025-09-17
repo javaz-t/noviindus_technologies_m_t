@@ -7,15 +7,36 @@ import 'package:noviindus_technologies_m_t/presentation/screens/login/login_scre
 import 'package:noviindus_technologies_m_t/presentation/screens/registration/registration_screen.dart';
 import 'package:noviindus_technologies_m_t/presentation/widget/custom_app_bar.dart';
 import 'package:noviindus_technologies_m_t/presentation/widget/custom_button.dart';
- import 'package:noviindus_technologies_m_t/presentation/widget/search_bar.dart';
+import 'package:noviindus_technologies_m_t/presentation/widget/search_bar.dart';
 import 'package:noviindus_technologies_m_t/presentation/widget/sort_widget.dart';
 import 'package:provider/provider.dart';
- import '../../providers/patient_provider.dart';
+import '../../providers/patient_provider.dart';
 import '../../widget/custom_patient_title.dart';
 import '../../widget/custom_shimmer.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  final bool isFromLoginScreen;
+  const HomeScreen({super.key, this.isFromLoginScreen = false});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.isFromLoginScreen) {
+        _loadPatients();
+      }
+    });
+  }
+
+  Future<void> _loadPatients() async {
+    final patientProvider = context.read<PatientProvider>();
+    await patientProvider.fetchPatients();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +61,8 @@ class HomeScreen extends StatelessWidget {
         child: Consumer<PatientProvider>(
           builder: (context, provider, child) {
             if (provider.isLoading) {
-              return const CustomShimmer( );
+              return const CustomShimmer();
             }
-
 
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -71,14 +91,12 @@ class HomeScreen extends StatelessWidget {
                   5.vs(),
                   provider.patients.isEmpty
                       ? const Expanded(
-                          child: Center(
-                            child: Text('No patients found'),
-                          ),
+                          child: Center(child: Text('No patients found')),
                         )
                       : Expanded(
                           child: RefreshIndicator(
                             onRefresh: () async {
-                              await _loadPatients(context);
+                              await _loadPatients();
                             },
                             child: ListView.builder(
                               physics: const AlwaysScrollableScrollPhysics(),
@@ -100,11 +118,6 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Future<void> _loadPatients(BuildContext context) async {
-    final patientProvider = context.read<PatientProvider>();
-    await patientProvider.fetchPatients();
   }
 
   Future<void> showLogoutConfirmationDialog(BuildContext context) async {

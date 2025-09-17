@@ -37,7 +37,7 @@ class LoginScreen extends StatelessWidget {
                         fontSize: 24,
                         fontWeight: FontWeight.w600,
                       ),
-30.vs(),
+                      30.vs(),
                       CustomTextField(
                         onChanged: authProvider.onUserChange,
                         title: 'Email',
@@ -68,7 +68,7 @@ class LoginScreen extends StatelessWidget {
                                     "logged In  successfully",
                                   );
                                   pushAndRemoveUntilScreen(
-                                    HomeScreen(),
+                                    HomeScreen(isFromLoginScreen: true),
                                     context,
                                   );
                                 } else {
