@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:noviindus_technologies_m_t/core/constants/app_constant.dart';
 import 'package:noviindus_technologies_m_t/core/extensions/sized_box_extension.dart';
 import 'package:noviindus_technologies_m_t/core/helper/result_dialog.dart';
- import 'package:noviindus_technologies_m_t/domain/entities/treatment.dart';
+import 'package:noviindus_technologies_m_t/domain/entities/treatment.dart';
 import 'package:noviindus_technologies_m_t/presentation/providers/register_provider.dart';
 import 'package:noviindus_technologies_m_t/presentation/screens/invoice/invoice_screen.dart';
 import 'package:noviindus_technologies_m_t/presentation/widget/custom_app_bar.dart';
 import 'package:noviindus_technologies_m_t/presentation/widget/custom_button.dart';
 import 'package:noviindus_technologies_m_t/presentation/widget/custom_date_picker.dart';
 import 'package:noviindus_technologies_m_t/presentation/widget/custom_drop_down.dart';
+import 'package:noviindus_technologies_m_t/presentation/widget/custom_shimmer.dart';
 import 'package:noviindus_technologies_m_t/presentation/widget/custom_text.dart';
 import 'package:noviindus_technologies_m_t/presentation/widget/custom_text_field.dart';
 import 'package:noviindus_technologies_m_t/presentation/widget/custom_time_picker.dart';
@@ -41,9 +42,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         child: Consumer<RegisterProvider>(
           builder: (context, registerProvider, _) {
             if (registerProvider.isLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const CustomShimmer();
             }
-
             return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

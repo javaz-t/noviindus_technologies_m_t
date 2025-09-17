@@ -7,12 +7,12 @@ import 'package:noviindus_technologies_m_t/presentation/screens/login/login_scre
 import 'package:noviindus_technologies_m_t/presentation/screens/registration/registration_screen.dart';
 import 'package:noviindus_technologies_m_t/presentation/widget/custom_app_bar.dart';
 import 'package:noviindus_technologies_m_t/presentation/widget/custom_button.dart';
-import 'package:noviindus_technologies_m_t/presentation/widget/loading_widget.dart';
-import 'package:noviindus_technologies_m_t/presentation/widget/search_bar.dart';
+ import 'package:noviindus_technologies_m_t/presentation/widget/search_bar.dart';
 import 'package:noviindus_technologies_m_t/presentation/widget/sort_widget.dart';
 import 'package:provider/provider.dart';
-import '../../providers/patient_provider.dart';
+ import '../../providers/patient_provider.dart';
 import '../../widget/custom_patient_title.dart';
+import '../../widget/custom_shimmer.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
         child: Consumer<PatientProvider>(
           builder: (context, provider, child) {
             if (provider.isLoading) {
-              return const LoadingWidget(message: "loading...");
+              return const CustomShimmer( );
             }
 
 
