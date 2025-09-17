@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:noviindus_technologies_m_t/core/constants/app_constant.dart';
 import 'package:noviindus_technologies_m_t/core/extensions/sized_box_extension.dart';
-import 'package:noviindus_technologies_m_t/core/helper/result_dialog.dart';
+import 'package:noviindus_technologies_m_t/core/helper/toast_util.dart';
 import 'package:noviindus_technologies_m_t/domain/entities/treatment.dart';
 import 'package:noviindus_technologies_m_t/presentation/providers/register_provider.dart';
 import 'package:noviindus_technologies_m_t/presentation/screens/invoice/invoice_screen.dart';

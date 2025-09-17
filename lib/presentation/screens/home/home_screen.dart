@@ -72,7 +72,7 @@ class HomeScreen extends StatelessWidget {
                   provider.patients.isEmpty
                       ? const Expanded(
                           child: Center(
-                            child: Text('No matching patients found'),
+                            child: Text('No patients found'),
                           ),
                         )
                       : Expanded(

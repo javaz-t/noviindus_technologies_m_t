@@ -4,7 +4,7 @@ import 'package:noviindus_technologies_m_t/data/services/register_service.dart';
 import 'package:noviindus_technologies_m_t/presentation/providers/auth_provider.dart';
 import 'package:noviindus_technologies_m_t/presentation/providers/patient_provider.dart';
 import 'package:noviindus_technologies_m_t/presentation/providers/register_provider.dart';
- import 'package:noviindus_technologies_m_t/presentation/screens/splash/splash_screen.dart';
+import 'package:noviindus_technologies_m_t/presentation/screens/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'data/repository/auth_repository.dart';
 import 'data/services/auth_service.dart';

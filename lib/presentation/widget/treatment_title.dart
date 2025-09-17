@@ -63,7 +63,7 @@ class TreatmentTile extends StatelessWidget {
                     Row(
                       children: [
                         _buildCountBox('Male', treatment.male),
-                        20.hs(),
+                        20.hs(),///todo:
                         _buildCountBox('Female', treatment.female),
                       ],
                     ),
