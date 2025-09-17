@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:noviindus_technologies_m_t/core/constants/app_constant.dart';
- import 'package:noviindus_technologies_m_t/core/extensions/sized_box_extension.dart';
+import 'package:noviindus_technologies_m_t/core/extensions/sized_box_extension.dart';
 import 'package:noviindus_technologies_m_t/core/helper/date_format.dart';
- import 'package:noviindus_technologies_m_t/presentation/widget/custom_text.dart';
+import 'package:noviindus_technologies_m_t/presentation/widget/custom_text.dart';
 
 import '../../data/model/patient_model.dart';
 
@@ -10,7 +10,11 @@ class CustomPatientTitle extends StatelessWidget {
   final PatientModel patient;
   final int index;
 
-  const CustomPatientTitle({super.key, required this.patient,required this.index});
+  const CustomPatientTitle({
+    super.key,
+    required this.patient,
+    required this.index,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,51 +34,57 @@ class CustomPatientTitle extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomText(
-                  text: '${index+1}',
+                  text: '${index + 1}',
                   fontWeight: FontWeight.w500,
                   fontSize: 18,
                 ),
                 14.hs(),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                CustomText(
+                  text: patient.name.isEmpty ? "No name found" : patient.name,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 40),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                4.vs(),
+                SizedBox(
+                  width: 200,
+                  child: CustomText(
+                    text:
+                        patient.patientDetails.first.treatment ??
+                        "No Treatment Selected",
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                    color: AppConstants.patientTileSubTitleColor,
+                  ),
+                ),
+                14.vs(),
+                Row(
                   children: [
+                    Icon(Icons.calendar_today_outlined, color: Colors.red),
+                    4.hs(),
                     CustomText(
-                      text: patient.name,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18,
+                      text: formatDate(patient.dateTime ?? DateTime.now()),
+                      color: AppConstants.patientTileSubDetailsColor,
+                      fontSize: 15,
                     ),
-                    4.vs(),
+                    22.hs(),
+                    Icon(Icons.people_outline, color: Colors.red),
+                    4.hs(),
                     SizedBox(
-                      width:200,
+                      width: 80,
                       child: CustomText(
-                        text:patient.patientDetails.first.treatment??"No Treatment Selected",
-                        fontSize: 16,
-                        fontWeight: FontWeight.w300,
-                        color: AppConstants.patientTileSubTitleColor,
+                        text: patient.name,
+                        color: AppConstants.patientTileSubDetailsColor,
+                        fontSize: 15,
                       ),
-                    ),
-                    14.vs(),
-                    Row(
-                      children: [
-                        Icon(Icons.calendar_today_outlined, color: Colors.red),
-                        4.hs(),
-                        CustomText(
-                          text:formatDate(patient.dateTime??DateTime.now()),
-                          color: AppConstants.patientTileSubDetailsColor,
-                          fontSize: 15,
-                        ),
-                        22.hs(),
-                        Icon(Icons.people_outline, color: Colors.red),
-                        4.hs(),
-                         SizedBox(
-                           width: 80,
-                           child: CustomText(
-                            text: patient.name,
-                            color: AppConstants.patientTileSubDetailsColor,
-                            fontSize: 15,
-                          ),
-                        ),
-                      ],
                     ),
                   ],
                 ),
@@ -84,9 +94,9 @@ class CustomPatientTitle extends StatelessWidget {
           Divider(color: AppConstants.borderColor),
           9.vs(),
           InkWell(
-            onTap: (){
+            onTap: () {
               //todo: ask what need to do
-             },
+            },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
