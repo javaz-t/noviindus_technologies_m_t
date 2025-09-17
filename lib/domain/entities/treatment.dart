@@ -2,8 +2,10 @@ class Treatment {
   final String package;
   final int male;
   final int female;
+  final int price;
 
   Treatment({
+    required this.price,
     required this.package,
     required this.male,
     required this.female,
@@ -14,6 +16,7 @@ class Treatment {
       package: json['treatment'] as String,
       male: json['male'] as int,
       female: json['female'] as int,
+      price :json['price']as int
     );
   }
 
