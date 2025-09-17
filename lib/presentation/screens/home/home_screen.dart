@@ -14,24 +14,8 @@ import 'package:provider/provider.dart';
 import '../../providers/patient_provider.dart';
 import '../../widget/custom_patient_title.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final TextEditingController _searchController = TextEditingController();
-  String _searchQuery = '';
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _loadPatients();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +26,14 @@ class _HomeScreenState extends State<HomeScreen> {
           return provider.isLoading
               ? const SizedBox.shrink()
               : Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: CustomButton(
-              title: "Register Now",
-              onTap: () {
-                pushToScreen(const RegistrationScreen(), context);
-              },
-            ),
-          );
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: CustomButton(
+                    title: "Register Now",
+                    onTap: () {
+                      pushToScreen(const RegistrationScreen(), context);
+                    },
+                  ),
+                );
         },
       ),
       body: SafeArea(
@@ -59,11 +43,6 @@ class _HomeScreenState extends State<HomeScreen> {
               return const LoadingWidget(message: "loading...");
             }
 
-            final filteredPatients = provider.patients.where((patient) {
-              final query = _searchQuery.toLowerCase();
-              return patient.name.toLowerCase().contains(query) ||
-                  patient.phone.toLowerCase().contains(query);
-            }).toList();
 
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -77,11 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   16.vs(),
                   HomeSearchBar(
-                    searchController: _searchController,
+                    searchController: provider.searchController,
                     onChange: (val) {
-                      setState(() {
-                        _searchQuery = val;
-                      });
+                      provider.searchQuery = val;
                     },
                     onSearchTap: () {
                       // TODO: implement search API if required
@@ -92,29 +69,30 @@ class _HomeScreenState extends State<HomeScreen> {
                   5.vs(),
                   Divider(color: AppConstants.borderColor),
                   5.vs(),
-                  filteredPatients.isEmpty
+                  provider.patients.isEmpty
                       ? const Expanded(
-                    child: Center(
-                      child: Text('No matching patients found'),
-                    ),
-                  )
+                          child: Center(
+                            child: Text('No matching patients found'),
+                          ),
+                        )
                       : Expanded(
-                    child: RefreshIndicator(
-                      onRefresh: _loadPatients,
-                      child: ListView.builder(
-                        physics:
-                        const AlwaysScrollableScrollPhysics(),
-                        itemCount: filteredPatients.length,
-                        itemBuilder: (context, index) {
-                          final patient = filteredPatients[index];
-                          return CustomPatientTitle(
-                            index: index,
-                            patient: patient,
-                          );
-                        },
-                      ),
-                    ),
-                  ),
+                          child: RefreshIndicator(
+                            onRefresh: () async {
+                              await _loadPatients(context);
+                            },
+                            child: ListView.builder(
+                              physics: const AlwaysScrollableScrollPhysics(),
+                              itemCount: provider.patients.length,
+                              itemBuilder: (context, index) {
+                                final patient = provider.patients[index];
+                                return CustomPatientTitle(
+                                  index: index,
+                                  patient: patient,
+                                );
+                              },
+                            ),
+                          ),
+                        ),
                 ],
               ),
             );
@@ -124,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Future<void> _loadPatients() async {
+  Future<void> _loadPatients(BuildContext context) async {
     final patientProvider = context.read<PatientProvider>();
     await patientProvider.fetchPatients();
   }
@@ -148,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: const Text('Log Out'),
               onPressed: () async {
                 await SharedPrefsStorage.clearToken();
-                pushAndRemoveUntilScreen(  LoginScreen(), context);
+                pushAndRemoveUntilScreen(LoginScreen(), context);
               },
             ),
           ],

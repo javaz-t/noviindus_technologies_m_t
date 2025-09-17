@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:noviindus_technologies_m_t/core/extensions/navigation_extension.dart';
 import 'package:provider/provider.dart';
-
 import '../../providers/auth_provider.dart';
+import '../../providers/patient_provider.dart';
 import '../login/login_screen.dart';
 import '../home/home_screen.dart'; // Assuming you have a home screen
 
@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen>
     // Animation setup
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 3),
     );
 
     _scaleAnimation = Tween<double>(
@@ -42,7 +42,8 @@ class _SplashScreenState extends State<SplashScreen>
 
     // Start animation and check login status
     _controller.forward();
-    _checkLoginAndNavigate();
+    //_checkLoginAndNavigate();
+    _prepareApp();
   }
 
   @override
@@ -76,24 +77,17 @@ class _SplashScreenState extends State<SplashScreen>
     );
   }
 
-  Future<void> _checkLoginAndNavigate() async {
-   await Future.wait([
-      Future.delayed(const Duration(seconds: 3)),
-      _checkLogin(),
-    ]);
-
+  Future<void> _prepareApp() async {
     final authProvider = context.read<AuthProvider>();
     final loggedIn = await authProvider.checkLogin();
 
     if (loggedIn) {
+       context.read<PatientProvider>().fetchPatients();
+       await Future.delayed(const Duration(seconds: 5));
       pushAndRemoveUntilScreen(HomeScreen(), context);
     } else {
+      await Future.delayed(const Duration(seconds: 3));
       pushAndRemoveUntilScreen(LoginScreen(), context);
     }
-  }
-
-  Future<bool> _checkLogin() async {
-    final authProvider = context.read<AuthProvider>();
-    return await authProvider.checkLogin();
   }
 }
