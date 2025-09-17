@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen>
     // Animation setup
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 4),
     );
 
     _scaleAnimation = Tween<double>(
@@ -82,8 +82,8 @@ class _SplashScreenState extends State<SplashScreen>
     final loggedIn = await authProvider.checkLogin();
 
     if (loggedIn) {
-       context.read<PatientProvider>().fetchPatients();
-       await Future.delayed(const Duration(seconds: 5));
+      context.read<PatientProvider>().fetchPatients();
+      await Future.delayed(const Duration(seconds: 5));
       pushAndRemoveUntilScreen(HomeScreen(), context);
     } else {
       await Future.delayed(const Duration(seconds: 3));
